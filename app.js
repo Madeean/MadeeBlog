@@ -9,7 +9,8 @@ const flash = require('connect-flash')
 var cors = require('cors')
 
 // memanggil router
-var user = require('./app/Test/router')
+var AuthRouter = require('./app/Auth/router')
+var user = require('./app/Landing/router')
 
 
 var app = express();
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
 // tempat taruh http router
+app.use('/', AuthRouter);
 app.use('/',user)
 
 // catch 404 and forward to error handler
