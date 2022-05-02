@@ -18,6 +18,11 @@ let userSchema = mongoose.Schema({
         enum:['admin','user'],
         default:'user'
     },
+    active:{
+        type:String,
+        enum:['1','0'],
+        default:'1'
+    },
     
 
 

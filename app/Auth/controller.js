@@ -90,7 +90,8 @@ module.exports={
                 let user = await User({name,email,password})
                 user.password =  await bcrypt.hash(password,salt)
                 await user.save();
-                
+                req.flash('alertMessage',`akun telah dibuat`)
+                req.flash('alertStatus', 'success')
                 res.redirect('/login')
             }
         } catch (err) {

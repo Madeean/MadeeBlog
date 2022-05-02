@@ -10,8 +10,9 @@ var cors = require('cors')
 
 // memanggil router
 var AuthRouter = require('./app/Auth/router')
-var user = require('./app/Landing/router')
+var Landing = require('./app/Landing/router')
 var Dashboard = require('./app/Dashboard/router')
+var User = require('./app/User/router')
 
 
 var app = express();
@@ -37,8 +38,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // tempat taruh http router
 app.use('/', AuthRouter);
-app.use('/',user)
+app.use('/',Landing)
 app.use('/dashboard',Dashboard)
+app.use('/user',User)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
