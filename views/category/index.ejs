@@ -1,0 +1,79 @@
+<%- include ('../dashboard_partials/header') %>
+
+<div class="p-10">
+    <div class="card h-full bg-base-100 shadow-xl">
+      
+        <div class="card-body">
+          <%- include ('../partials/message.ejs')%>
+          <div class="">
+            <!-- The button to open modal -->
+            <label for="my-modal-3" class="btn modal-button">Create Category</label>
+
+            <!-- Put this part before </body> tag -->
+            <input type="checkbox" id="my-modal-3" class="modal-toggle">
+            <div class="modal">
+              <div class="modal-box relative ">
+                <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                <h3 class="text-lg font-bold text-center">Create Category</h3>
+                  <form action="/category/create" method="post">
+                    <div class="form-control">
+                      <label class="label">
+                        <span class="label-text">Name Category</span>
+                      </label>
+                      <input type="text" placeholder="Name Category" class="input input-bordered" name="name" required>
+                    </div>
+                    <div class="text-right mt-4">
+                      <button class="btn btn-primary ">create</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+          <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+            <thead>
+              <tr>
+                <th data-priority="1">No.</th>
+                <th data-priority="1">Name</th>
+                <th data-priority="6">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%for(let i = 0; i<category.length; i++){%>
+              <tr class="text-center">
+                  <td><%= i+1%></td>
+                  <td><%= category[i].name%></td>
+                  <td>
+                    <form action="/category/delete/<%=category[i]._id %>?_method=DELETE" method="POST">
+                      <a href="/category/edit/<%= category[i]._id %>" class="btn btn-info">Ubah</a>
+                      <button class="btn btn-error">Hapus</button>
+                    </form>
+                  </td>
+                  
+              </tr>
+              <%}%>
+    
+            </tbody>
+    
+          </table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<!--Datatables -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script>
+  $(document).ready(function() {
+
+    var table = $('#example').DataTable({
+        responsive: true
+      })
+      .columns.adjust()
+      .responsive.recalc();
+  });
+</script>
+
+<%- include ('../dashboard_partials/footer') %>

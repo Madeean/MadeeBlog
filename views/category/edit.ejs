@@ -1,0 +1,26 @@
+<%- include ('../dashboard_partials/header.ejs')%>
+
+<div class="p-10">
+    <div class="card h-full bg-base-100 shadow-xl">
+      
+        <div class="card-body">
+          <h1 class="text-center text-lg">Edit Category</h1>
+            <form action="/category/edit/<%=category._id%>?_method=PUT" method="post">
+                <div class="form-control">
+                    <label class="label">
+                    <span span class="label-text">Name</span>
+                    </label>
+                    <input type="text" placeholder="Category" class="input input-bordered" name="name" required value="<%=category.name%>">
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include ('../dashboard_partials/footer.ejs')%>

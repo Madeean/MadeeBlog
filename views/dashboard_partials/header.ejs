@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Windmill Dashboard</title>
-    <link rel="stylesheet" href="stylesheets/output.css">
+    <title>Madee Blog - Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -57,31 +57,36 @@
           </li>
         </ul>
         <ul>
-          <%if(session.role == "admin"){%>
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/user"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+            <%if(session.role == "admin"){%>
+              <li class="relative px-6 py-3">
+                <a
+                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  href="/user"
                 >
-                  <path
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                  ></path>
-                </svg>
-                <span class="ml-4">User</span>
-              </a>
-            </li>
-          <%}%>
-          
+                  <i class="fas fa-users ml-1 text-lg"></i>
+                  <span class="ml-4">User</span>
+                </a>
+              </li>
+              <li class="relative px-6 py-3">
+                <a
+                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  href="/category"
+                >
+                  <i class="fas fa-archive ml-1 text-lg"></i>
+                  <span class="ml-4">Category</span>
+                </a>
+              </li>
+            <%}else{%>
+              <li class="relative px-6 py-3">
+                <a
+                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  href="/category"
+                >
+                  <i class="fas fa-archive ml-1 text-lg"></i>
+                  <span class="ml-4">test</span>
+                </a>
+              </li>
+            <%}%>
 
         </ul>
       </div>

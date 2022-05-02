@@ -7,6 +7,7 @@ let userSchema = mongoose.Schema({
     },
     email:{
         type:String,
+        unique: true,
         require:[true,"email tidak boleh kosong"]
     },
     password:{

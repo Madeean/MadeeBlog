@@ -13,6 +13,7 @@ var AuthRouter = require('./app/Auth/router')
 var Landing = require('./app/Landing/router')
 var Dashboard = require('./app/Dashboard/router')
 var User = require('./app/User/router')
+var Category = require('./app/Category/router')
 
 
 var app = express();
@@ -35,12 +36,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(__dirname + '/public'));
 
 // tempat taruh http router
 app.use('/', AuthRouter);
 app.use('/',Landing)
 app.use('/dashboard',Dashboard)
 app.use('/user',User)
+app.use('/category',Category)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

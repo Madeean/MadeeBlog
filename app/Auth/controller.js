@@ -53,7 +53,8 @@ module.exports={
                         id:check._id,
                         email:check.email,
                         role:check.role,
-                        name:check.name
+                        name:check.name,
+                        active:check.active
                     }
                     console.log("sukses login");
                     res.redirect('/dashboard')
