@@ -19,6 +19,15 @@
   <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   
+  <link rel="stylesheet" type="text/css" href="/stylesheets/trix.css">
+  <script type="text/javascript" src="/javascripts/trix.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    trix-toolbar [data-trix-button-group = "file-tools"]{
+      display: none;
+    }
+  </style>
   </head>
 <body>
   <div class="flex h-screen bg-gray-50 dark:bg-gray-900">
@@ -76,18 +85,18 @@
                   <span class="ml-4">Category</span>
                 </a>
               </li>
-            <%}else{%>
+            <%}%>
+
               <li class="relative px-6 py-3">
                 <a
                   class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                  href="/category"
+                  href="/artikel"
                 >
-                  <i class="fas fa-archive ml-1 text-lg"></i>
-                  <span class="ml-4">test</span>
+                  <i class="fas fa-file-alt ml-1 text-lg"></i>
+                  <span class="ml-4">Artikel</span>
                 </a>
               </li>
-            <%}%>
-
+          
         </ul>
       </div>
     </aside>

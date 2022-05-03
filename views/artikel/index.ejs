@@ -1,0 +1,66 @@
+<%- include ('../dashboard_partials/header') %>
+
+<div class="p-10">
+    <div class="card h-full bg-base-100 shadow-xl">
+      
+		<div class="card-body">
+			<div>
+				<a href="/artikel/create" class="btn btn-success">Create Artikel</a>
+			</div>
+            <%- include ('../partials/message.ejs')%>
+          <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+            <thead>
+              <tr>
+                <th data-priority="1">No.</th>
+                <th data-priority="2">judul</th>
+                <th data-priority="3">category</th>
+                <th data-priority="4">views</th>
+                <th data-priority="5">like</th>
+                <th data-priority="6">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%for(let i = 0; i<artikel.length; i++){%>
+              <tr class="text-center">
+                  <td><%= i+1%></td>
+                  <td><%= artikel[i].judul%></td>
+                  <td><%= artikel[i].category?.name%></td>
+                  <td><%= artikel[i].views%></td>
+                  <td><%= artikel[i].like%></td>
+                  <td>
+                    <!-- <a href="/artikel/<%= artikel[i]._id %>" class="btn btn-primary">Detail</a> -->
+                    <a href="/artikel/<%= artikel[i]._id%>" class="btn btn-primary">Detail</a>
+                    <a href="/artikel/edit/<%= artikel[i]._id %>" class="btn btn-info">Ubah</a>
+                    <form action="/artikel/delete/<%=artikel[i]._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-error">Hapus</button>
+                    </form>
+                  </td>
+                  
+              </tr>
+              <%}%>
+    
+            </tbody>
+    
+          </table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script>
+  $(document).ready(function() {
+
+    var table = $('#example').DataTable({
+        responsive: true
+      })
+      .columns.adjust()
+      .responsive.recalc();
+  });
+</script>
+
+<%- include ('../dashboard_partials/footer') %>

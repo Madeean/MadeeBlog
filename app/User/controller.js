@@ -15,7 +15,7 @@ module.exports={
                 const alertStatus = req.flash("alertStatus")
                 const alert = {message:alertMessage, status:alertStatus}
                 const user = await User.find()
-                res.render('dashboard/user',{
+                res.render('user/User',{
                     session:req.session.user,
                     alert,
                     user

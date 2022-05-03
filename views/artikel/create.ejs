@@ -1,0 +1,63 @@
+<%- include ('../dashboard_partials/header.ejs')%>
+
+<div class="p-10">
+    <div class="card h-full bg-base-100 shadow-xl">
+      
+        <div class="card-body block">
+          <h1 class="text-center text-lg">Create Artikel</h1>
+            <form action="/artikel/create" method="POST" enctype="multipart/form-data">
+                <div class="form-control">
+                    <label class="label">
+                    <span span class="label-text">judul</span>
+                    </label>
+                    <input type="text" placeholder="Judul" class="input input-bordered" name="judul" id="judul" required >
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span span class="label-text">category</span>
+                    </label>
+                    
+                    <div class="relative">
+                        <select class="block appearance-none w-full border-2 border-solid  border-gray-200  py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" name="category" id="category">
+                        <option disabled selected>Pick category</option>
+                        <%for(let i = 0; i<category.length; i++){%>
+                            <option value="<%= category[i]._id%>"><%=category[i].name%></option>
+                        <%}%>
+                          
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                      </div>
+                </div>
+                <div class="form-control">
+                    <label class="label">
+                    <span span class="label-text">Thumbnail</span>
+                    </label>
+                    <input type="file" class="input input-bordered h-full" name="thumbnail"  id="thumbnail"/><br/>
+                    <div id="frames"></div>
+                </div>
+                
+
+                <div class="form-control">
+                    <label class="label">
+                        <span span class="label-text">Body</span>
+                    </label>
+                    <input type="hidden"  class="input input-bordered" name="body" id="body" required >
+                    <trix-editor input="body" name="body" class="block"></trix-editor>
+                </div>
+
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include ('../dashboard_partials/footer.ejs')%>

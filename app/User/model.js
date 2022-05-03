@@ -24,6 +24,18 @@ let userSchema = mongoose.Schema({
         enum:['1','0'],
         default:'1'
     },
+    artikel:{
+        type:Number,
+        default:0
+    },
+    pembaca:{
+        type:Number,
+        default:0
+    },
+    like:{
+        type:Number,
+        default:0
+    }
     
 
 
