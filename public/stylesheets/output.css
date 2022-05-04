@@ -3647,6 +3647,14 @@ body[dir="rtl"] .checkbox:checked,
   margin-top: 1rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
 .mb-16 {
   margin-bottom: 4rem;
 }
@@ -3681,14 +3689,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .mt-3 {
   margin-top: 0.75rem;
-}
-
-.ml-auto {
-  margin-left: auto;
-}
-
-.mr-auto {
-  margin-right: auto;
 }
 
 .block {
