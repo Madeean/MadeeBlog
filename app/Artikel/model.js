@@ -26,6 +26,10 @@ let artikelSchema = mongoose.Schema({
     },
     like:{
         type:Number,
+    },
+    abstract:{
+        type:String,
+        require:true
     }
 },{timestamps:true})
 

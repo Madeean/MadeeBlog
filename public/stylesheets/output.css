@@ -3659,6 +3659,10 @@ body[dir="rtl"] .checkbox:checked,
   margin-bottom: 4rem;
 }
 
+.mt-14 {
+  margin-top: 3.5rem;
+}
+
 .ml-4 {
   margin-left: 1rem;
 }
@@ -3741,6 +3745,18 @@ body[dir="rtl"] .checkbox:checked,
 
 .h-6 {
   height: 1.5rem;
+}
+
+.h-56 {
+  height: 14rem;
+}
+
+.h-48 {
+  height: 12rem;
+}
+
+.h-52 {
+  height: 13rem;
 }
 
 .max-h-screen {
@@ -4000,6 +4016,11 @@ body[dir="rtl"] .checkbox:checked,
   line-height: 1.75rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -4014,6 +4035,11 @@ body[dir="rtl"] .checkbox:checked,
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-gray-700 {
@@ -4172,6 +4198,10 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
 		table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
   background-color: #93a6f7 !important;
   /*bg-indigo-500*/
+}
+
+.img_landing{
+  width: 400px;
 }
 
 .hover\:text-gray-800:hover {

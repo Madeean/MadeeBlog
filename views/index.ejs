@@ -36,62 +36,22 @@
 <div class="mt-8 lg:ml-16 lg:mr-16">
     <div class="flex justify-between">
         <div class="w-9/12">
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
-            <div class="card lg:card-side bg-base-100 shadow-xl h-40 mb-4">
-                <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">New album is released!</h2>
-                  <p>Click the button to listen on Spotiwhy app.</p>
-                </div>
-            </div>
+            <%for(let i = 0; i<artikel.length; i++){%>
+                  <form action="/<%=artikel[i]._id%>?_method=PUT" method="post">
+                    <div class="card lg:card-side bg-base-100 shadow-xl h-56 mb-4">
+                        <figure><img src="/uploads/<%=artikel[i].thumbnail%>" class="img_landing" alt="Album"></figure>
+                        <div class="card-body">
+                          <h2 class="card-title"><%=artikel[i].judul%></h2>
+                          <div class="badge badge-accent text-white"><%=artikel[i].category?.name%></div>
+                          <h1><%= moment(artikel[i].createdAt).format('DD MMM YYYY')%> - <%=artikel[i].user_id?.name%></h1>
+                          <h1><%- artikel[i].body%></h1>
+                          <div class="flex justify-end">
+                            <button type="submit" class="btn btn-primary">See Article</button>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+            <%}%>
             
             <div>
                 <button class="btn btn-primary">previous</button>
@@ -150,6 +110,9 @@
       },
       pagination: {
         el: ".swiper-pagination",
+      },
+      autoplay: {
+        delay: 5000,
       },
       mousewheel: true,
       keyboard: true,
