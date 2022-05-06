@@ -1,0 +1,19 @@
+<%- include ('../partials/header') %>
+<div class="lg:ml-16 lg:mr-16">
+  <%- include ('../partials/message')%>
+</div>
+
+<div class="mt-8 lg:ml-16 lg:mr-16 mb-8">
+    <div class="grid grid-cols-3 gap-x-40 gap-y-12">
+        <%for(let i=0; i<category.length; i++){%>
+        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+            <figure><img src="https://source.unsplash.com/400x225/?<%=category[i].name%>" alt="Shoes" /></figure>
+            <div class="card-body">
+              <h2 class="card-title mt-4 justify-center"><%=category[i].name%></h2>
+            </div>
+        </div>
+        <%}%>
+        
+    </div>
+</div>
+<%- include ('../partials/footer') %>

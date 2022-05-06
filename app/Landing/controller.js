@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const Artikel = require('../Artikel/model')
 const User = require('../User/model')
 const Komentar = require('../Komentar/model')
+const Category = require('../Category/model')
 var moment = require('moment');
 
 module.exports={
@@ -87,6 +88,24 @@ module.exports={
             req.flash('alertStatus', 'success')
             res.redirect(`/view/${id}`)
             
+        } catch (err) {
+            req.flash('alertMessage',`${err.message}`)
+            req.flash('alertStatus', 'error')
+            console.log(err);
+            res.redirect('/')
+        }
+    },
+    viewCategory:async(req,res)=>{
+        try {
+            const alertMessage = req.flash("alertMessage")
+            const alertStatus = req.flash("alertStatus")
+            const alert = {message:alertMessage, status:alertStatus}
+            const category = await Category.find()
+            res.render('landing/category',{
+                alert,
+                session:req.session.user,
+                category
+            })
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)
             req.flash('alertStatus', 'error')

@@ -3695,6 +3695,10 @@ body[dir="rtl"] .checkbox:checked,
   margin-top: 0.75rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .block {
   display: block;
 }
@@ -3803,6 +3807,10 @@ body[dir="rtl"] .checkbox:checked,
   width: 1.5rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
 .max-w-sm {
   max-width: 24rem;
 }
@@ -3829,6 +3837,10 @@ body[dir="rtl"] .checkbox:checked,
   grid-auto-flow: column;
 }
 
+.grid-flow-col-dense {
+  grid-auto-flow: column dense;
+}
+
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -3839,6 +3851,10 @@ body[dir="rtl"] .checkbox:checked,
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -3857,9 +3873,33 @@ body[dir="rtl"] .checkbox:checked,
   gap: 1rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
+.gap-16 {
+  gap: 4rem;
+}
+
+.gap-20 {
+  gap: 5rem;
+}
+
+.gap-40 {
+  gap: 10rem;
+}
+
+.gap-56 {
+  gap: 14rem;
+}
+
 .gap-x-40 {
   -moz-column-gap: 10rem;
        column-gap: 10rem;
+}
+
+.gap-y-12 {
+  row-gap: 3rem;
 }
 
 .overflow-y-auto {
