@@ -12,7 +12,7 @@ module.exports={
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
             let session_id= req.session.user.id
-            const artikel = await Artikel.find({user_id:session_id}).populate('category')
+            const artikel = await Artikel.find({user:session_id}).populate('category')
             
 
             res.render('artikel/index',{
@@ -45,7 +45,7 @@ module.exports={
     actionCreate:async(req,res)=>{
         try {
             const {judul,category,body} = req.body;
-            let user_id = req.session.user.id
+            let user = req.session.user.id
             let views = 0
             let like = 0
             
@@ -61,7 +61,7 @@ module.exports={
                 src.on('end',async()=>{
                     try {
                         const artikel = new Artikel({
-                            user_id,judul,category,body,views,like,thumbnail:filename
+                            user,judul,category,body,views,like,thumbnail:filename
                         })
                         await artikel.save()
                         req.flash('alertMessage', "Berhasil tambah artikel")

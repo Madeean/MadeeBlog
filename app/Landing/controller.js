@@ -1,6 +1,8 @@
 // const User = require('./model')
-const Artikel = require('../Artikel/model')
 const bcrypt = require('bcryptjs')
+const Artikel = require('../Artikel/model')
+const User = require('../User/model')
+const Komentar = require('../Komentar/model')
 var moment = require('moment');
 
 module.exports={
@@ -10,7 +12,7 @@ module.exports={
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
             // const user = await User.find()
-            const artikel = await Artikel.find().populate('category').populate('user_id')
+            const artikel = await Artikel.find().populate('category').populate('user')
             res.render('index',{
                 session:req.session.user,
                 alert,
@@ -30,13 +32,15 @@ module.exports={
             const alertMessage = req.flash("alertMessage")
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
-            const artikel = await Artikel.findOne({_id:id}).populate('category').populate('user_id')
+            const artikel = await Artikel.findOne({_id:id}).populate('category').populate('user')
+            const komentar = await Komentar.find({artikel:id}).populate('user_id')
 
             res.render('landing/detail',{
                 session:req.session.user,
                 artikel,
                 moment:moment,
-                alert
+                alert,
+                komentar
             })
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)
@@ -58,12 +62,30 @@ module.exports={
                 views:increment
             })
             console.log("bisa")
-            // const artikel = await Artikel.findOne({_id:id}).populate('category').populate('user_id')
-            // console.log("BISA")
 
-            res.redirect(`/${id}`)
+            res.redirect(`/view/${id}`)
             
             
+            
+        } catch (err) {
+            req.flash('alertMessage',`${err.message}`)
+            req.flash('alertStatus', 'error')
+            console.log(err);
+            res.redirect('/')
+        }
+    },
+    actionKomentar:async(req,res)=>{
+        try {
+            console.log("masuk")
+            const {id} = req.params;
+            const {komentar} = req.body;
+            let user_id = req.session.user.id
+            let artikel = id
+            const komen = await Komentar({user_id,artikel,komentar})
+            komen.save()
+            req.flash('alertMessage',`komentar berhasil dibuat`)
+            req.flash('alertStatus', 'success')
+            res.redirect(`/view/${id}`)
             
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)

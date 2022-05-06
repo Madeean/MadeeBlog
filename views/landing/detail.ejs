@@ -1,6 +1,6 @@
 <%- include ('../partials/header') %>
 <div class="lg:ml-16 lg:mr-16">
-  <%- include ('../partials/message.ejs')%>
+  <%- include ('../partials/message')%>
 </div>
 
 <div class="mt-8 lg:ml-16 lg:mr-16">
@@ -9,13 +9,48 @@
         <div class="mt-8">
             <h1 class="text-center text-5xl"><%=artikel.judul%></h1>
             <h1>Created at= <%=moment(artikel.createdAt).format('hh:mm a DD MMM YYYY')%></h1>
-            <h1>Created By: <%= artikel.user_id?.name%> </h1>
+            <h1>Created By: <%= artikel.user?.name%> </h1>
             <h1>Category: <button class="badge badge-accent"><%=artikel.category?.name%></button></h1>
             <h1>like= <%=artikel.like%></h1>
             <h1>views = <%=artikel.views%></h1>
         </div>
         <div class="mt-8">
             <h1 class="text-center"><%-artikel.body%></h1>
+        </div>
+        <div class="mt-8">
+            <h1>Komentar</h1>
+            <%for(let j = 0; j<komentar.length; j++){%>
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                  <h2 class="card-title"><%=komentar[j].user_id?.name%></h2>
+                  <p><%=komentar[j].komentar%></p>
+                </div>
+            </div>
+            <%}%>
+        </div>
+        <div class="mt-8 flex justify-center">
+            <div class="card flex-shrink-0 w-3/4  shadow-2xl bg-base-100">
+                <div class="card-body">
+                    <form action="/view/<%=artikel._id%>" method="post">
+                        <div class="form-control">
+                          <label class="label">
+                            <span class="label-text">Isi Pesan</span>
+                          </label>
+                          <input type="text" placeholder="Isi Pesan" class="input input-bordered" name="komentar" id="komentar" required>
+                        </div>
+                        <%if(session == undefined || session == null ){%>
+                        <div class="form-control mt-6">
+                          <button class="btn btn-primary" disabled="disabled">Komentar</button>
+                          <h1 class="text-center">Login dahulu</h1>
+                        </div>
+                        <%}else{%>
+                        <div class="form-control mt-6">
+                          <button class="btn btn-primary">Komentar</button>
+                        </div>
+                        <%}%>
+                    </form>
+                </div>
+            </div>
         </div>
         <a href="/" class="btn btn-primary mt-8" >Back</a>
     </div>

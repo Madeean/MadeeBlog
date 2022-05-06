@@ -37,15 +37,15 @@
     <div class="flex justify-between">
         <div class="w-9/12">
             <%for(let i = 0; i<artikel.length; i++){%>
-                  <form action="/<%=artikel[i]._id%>?_method=PUT" method="post">
+                  <form action="/view/<%=artikel[i]._id%>?_method=PUT" method="post">
                     <div class="card lg:card-side bg-base-100 shadow-xl h-56 mb-4">
                         <figure><img src="/uploads/<%=artikel[i].thumbnail%>" class="img_landing" alt="Album"></figure>
                         <div class="card-body">
                           <h2 class="card-title"><%=artikel[i].judul%></h2>
                           <div class="badge badge-accent text-white"><%=artikel[i].category?.name%></div>
-                          <h1><%= moment(artikel[i].createdAt).format('DD MMM YYYY')%> - <%=artikel[i].user_id?.name%></h1>
+                          <h1><%= moment(artikel[i].createdAt).format('DD MMM YYYY')%> - <%=artikel[i].user?.name%></h1>
                           <h1><%- artikel[i].body%></h1>
-                          <div class="flex justify-end">
+                          <div class="flex justify-end mr-3">
                             <button type="submit" class="btn btn-primary">See Article</button>
                           </div>
                         </div>
@@ -110,9 +110,6 @@
       },
       pagination: {
         el: ".swiper-pagination",
-      },
-      autoplay: {
-        delay: 5000,
       },
       mousewheel: true,
       keyboard: true,

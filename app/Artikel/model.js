@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 let artikelSchema = mongoose.Schema({
-    user_id:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
@@ -26,10 +26,6 @@ let artikelSchema = mongoose.Schema({
     },
     like:{
         type:Number,
-    },
-    abstract:{
-        type:String,
-        require:true
     }
 },{timestamps:true})
 

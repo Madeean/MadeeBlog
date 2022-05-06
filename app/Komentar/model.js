@@ -5,8 +5,12 @@ let komentarSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
+    artikel:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Artikel'
+    },
     komentar:{
-        type:Text,
+        type:String,
         require:[true,"teks harus diisi jika ingin berkomentar"],
     }
 },{timestamps:true})
