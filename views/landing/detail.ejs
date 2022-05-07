@@ -8,7 +8,31 @@
         <img src="/uploads/<%=artikel.thumbnail%>" alt="" class="block ml-auto mr-auto">
         <div class="mt-8">
             <h1 class="text-center text-5xl"><%=artikel.judul%></h1>
-            <h1>Created at= <%=moment(artikel.createdAt).format('hh:mm a DD MMM YYYY')%></h1>
+            <div class="flex justify-between">
+              <div>
+                <h1>Created at= <%=moment(artikel.createdAt).format('DD MMM YYYY')%></h1>
+              </div>
+              <div>
+                
+                  <%if(session == null || session == undefined){%>
+                    <div class="tooltip" data-tip="Login Dahulu">
+                      <i class="far fa-heart text-red-500 text-3xl"></i>
+                    </div>
+                  <%}else{%>
+
+                    <%if(suka.like == 0){%>
+                      <form action="/like/post/<%=suka._id %>?aidi=<%=artikel.id%>&_method=PUT" method="POST" style="display: inline-block;">
+                        <button type="submit" class="bg-transparent" ><i class="far fa-heart text-red-500 text-3xl"></i></button>
+                      </form>
+                    <%}else if(suka.like == 1){%>
+                      <form action="/like/post/<%=suka._id %>?aidi=<%=artikel.id%>&_method=PUT" method="POST" style="display: inline-block;">
+                        <button  type="submit" class="bg-transparent" ><i class="fas fa-heart text-red-500 text-3xl"></i></button>
+                      </form>
+                    <%}%>
+                    
+                  <%}%>
+              </div>
+            </div>
             <h1>Created By: <%= artikel.user?.name%> </h1>
             <h1>Category: <button class="badge badge-accent"><%=artikel.category?.name%></button></h1>
             <h1>like= <%=artikel.like%></h1>
@@ -20,7 +44,7 @@
         <div class="mt-8">
             <h1>Komentar</h1>
             <%for(let j = 0; j<komentar.length; j++){%>
-            <div class="card bg-base-100 shadow-xl">
+            <div class="card bg-base-100 shadow-xl mb-4">
                 <div class="card-body">
                   <h2 class="card-title"><%=komentar[j].user_id?.name%></h2>
                   <p><%=komentar[j].komentar%></p>

@@ -4,6 +4,7 @@ const Artikel = require('../Artikel/model')
 const User = require('../User/model')
 const Komentar = require('../Komentar/model')
 const Category = require('../Category/model')
+const Like = require('../Like/model')
 var moment = require('moment');
 
 module.exports={
@@ -35,14 +36,29 @@ module.exports={
             const alert = {message:alertMessage, status:alertStatus}
             const artikel = await Artikel.findOne({_id:id}).populate('category').populate('user')
             const komentar = await Komentar.find({artikel:id}).populate('user_id')
-
-            res.render('landing/detail',{
-                session:req.session.user,
-                artikel,
-                moment:moment,
-                alert,
-                komentar
-            })
+            if(req.session.flash == undefined || req.session.flash == null || req.session.user){
+                let session_id = req.session.user.id
+                const suka = await Like.findOne({user_id:session_id,artikel:id}).populate('user_id').populate('artikel')
+                console.log("MASSOK")
+                console.log(artikel)
+                res.render('landing/detail',{
+                    session:req.session.user,
+                    artikel,
+                    moment:moment,
+                    alert,
+                    komentar,
+                    suka
+                })
+            }else{
+                res.render('landing/detail',{
+                    session:req.session.user,
+                    artikel,
+                    moment:moment,
+                    alert,
+                    komentar,
+                    
+                })
+            }
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)
             req.flash('alertStatus', 'error')
@@ -56,13 +72,25 @@ module.exports={
             const alertMessage = req.flash("alertMessage")
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
+            let hartikel = id
+
+            if(req.session.flash == undefined || req.session.flash == null || req.session.user){
+
+                let session_id = req.session.user.id
+                const like = await Like.findOne({user_id:session_id, artikel:hartikel})
+                if(!like){
+                    const suka = await Like({user_id:session_id,artikel:hartikel})
+                    suka.save()
+                }
+                
+            }
             const viewss = await Artikel.findOne({_id:id})
             let increment = viewss.views + 1
-            console.log(increment)
+
             await Artikel.findOneAndUpdate({_id:id},{
                 views:increment
             })
-            console.log("bisa")
+
 
             res.redirect(`/view/${id}`)
             
@@ -112,5 +140,5 @@ module.exports={
             console.log(err);
             res.redirect('/')
         }
-    }
+    },
 }

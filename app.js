@@ -15,6 +15,7 @@ var Dashboard = require('./app/Dashboard/router')
 var User = require('./app/User/router')
 var Category = require('./app/Category/router')
 var Artikel = require('./app/Artikel/router')
+var Like = require('./app/Like/router')
 
 
 var app = express();
@@ -46,6 +47,7 @@ app.use('/dashboard',Dashboard)
 app.use('/user',User)
 app.use('/category',Category)
 app.use('/artikel',Artikel)
+app.use('/like',Like)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

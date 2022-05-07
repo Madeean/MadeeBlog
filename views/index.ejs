@@ -43,7 +43,7 @@
                         <div class="card-body">
                           <h2 class="card-title"><%=artikel[i].judul%></h2>
                           <div class="badge badge-accent text-white"><%=artikel[i].category?.name%></div>
-                          <h1><%= moment(artikel[i].createdAt).format('DD MMM YYYY')%> - <%=artikel[i].user?.name%></h1>
+                          <h1><%= moment(artikel[i].createdAt).fromNow()%> - <%=artikel[i].user?.name%></h1>
                           <h1><%- artikel[i].body%></h1>
                           <div class="flex justify-end mr-3">
                             <button type="submit" class="btn btn-primary">See Article</button>
