@@ -14,6 +14,10 @@ let likeSchema = mongoose.Schema({
         enum:['1','0'],
         default:'0'
         
+    },
+    pembuat:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }
 },{timestamps:true})
 

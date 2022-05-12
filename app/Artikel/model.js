@@ -24,9 +24,6 @@ let artikelSchema = mongoose.Schema({
     views:{
         type:Number,
     },
-    like:{
-        type:Number,
-    }
 },{timestamps:true})
 
 module.exports = mongoose.model('Artikel', artikelSchema)

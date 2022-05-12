@@ -9,17 +9,22 @@ var moment = require('moment');
 
 module.exports={
     UserList: async(req,res)=>{
+
         try {
+            const berapa = req.query.berapa || 5 ;
             const alertMessage = req.flash("alertMessage")
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
-            // const user = await User.find()
-            const artikel = await Artikel.find().populate('category').populate('user')
+
+
+            const artikel = await Artikel.find().populate('category').populate('user').limit(berapa)
+            
             res.render('index',{
                 session:req.session.user,
                 alert,
                 artikel,
-                moment:moment
+                moment:moment,
+                query:berapa
             });
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)
@@ -39,8 +44,6 @@ module.exports={
             if(req.session.flash == undefined || req.session.flash == null || req.session.user){
                 let session_id = req.session.user.id
                 const suka = await Like.findOne({user_id:session_id,artikel:id}).populate('user_id').populate('artikel')
-                console.log("MASSOK")
-                console.log(artikel)
                 res.render('landing/detail',{
                     session:req.session.user,
                     artikel,
@@ -73,13 +76,13 @@ module.exports={
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
             let hartikel = id
-
+            const artikel = await Artikel.findOne({_id:id})
             if(req.session.flash == undefined || req.session.flash == null || req.session.user){
 
                 let session_id = req.session.user.id
-                const like = await Like.findOne({user_id:session_id, artikel:hartikel})
+                const like = await Like.findOne({user_id:session_id, artikel:hartikel,pembuat:artikel.user})
                 if(!like){
-                    const suka = await Like({user_id:session_id,artikel:hartikel})
+                    const suka = await Like({user_id:session_id,artikel:hartikel,pembuat:artikel.user})
                     suka.save()
                 }
                 
@@ -105,7 +108,6 @@ module.exports={
     },
     actionKomentar:async(req,res)=>{
         try {
-            console.log("masuk")
             const {id} = req.params;
             const {komentar} = req.body;
             let user_id = req.session.user.id
@@ -141,4 +143,44 @@ module.exports={
             res.redirect('/')
         }
     },
+    viewArtikelCategory:async(req,res)=>{
+        try {
+            const {name} = req.params
+            const category = await Category.findOne({name:name})
+            const artikel = await Artikel.find({category:category._id}).populate('category').populate('user')
+            const alertMessage = req.flash("alertMessage")
+            const alertStatus = req.flash("alertStatus")
+            const alert = {message:alertMessage, status:alertStatus}
+            res.render('landing/viewArtikelCategory',{
+                alert,
+                session:req.session.user,
+                artikel,
+                moment:moment,
+            })
+        } catch (err) {
+            req.flash('alertMessage',`${err.message}`)
+            req.flash('alertStatus', 'error')
+            console.log(err);
+            res.redirect('/')
+        }
+    },
+    viewPopular:async(req,res)=>{
+        try {
+            const artikel = await Artikel.find().sort({views:-1}).populate('category').populate('user')
+            const alertMessage = req.flash("alertMessage")
+            const alertStatus = req.flash("alertStatus")
+            const alert = {message:alertMessage, status:alertStatus}
+            res.render('landing/viewArtikelCategory',{
+                alert,
+                session:req.session.user,
+                artikel,
+                moment:moment,
+            })
+        } catch (err) {
+            req.flash('alertMessage',`${err.message}`)
+            req.flash('alertStatus', 'error')
+            console.log(err);
+            res.redirect('/')
+        }
+    }
 }

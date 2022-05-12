@@ -1,0 +1,27 @@
+<%- include ('../partials/header') %>
+<div class="lg:ml-16 lg:mr-16">
+  <%- include ('../partials/message')%>
+</div>
+
+<div class="mt-8 lg:ml-16 lg:mr-16 mb-8">
+    <%if(artikel.length === 0){%>
+        <h1 class="text-3xl text-center">Tidak ada artikel</h1>
+    <%}%>
+    <%for(let i= 0 ; i<artikel.length; i++){%>
+        <a href="/view/<%=artikel[i]._id%>">
+            <div class="card w-full bg-base-100 shadow-xl mb-6">
+                <div class="flex justify-start">
+                    <img src="/uploads/<%=artikel[i].thumbnail%>" alt="" class="w-56">
+                    <div class="card-body">
+                        <h2 class="card-title"><%=artikel[i].judul%></h2>
+                        <div class="badge badge-accent text-white"><%=artikel[i].category?.name%></div>
+                        <h1><%= moment(artikel[i].createdAt).fromNow()%> - <%=artikel[i].user?.name%></h1>
+                        <h1><%- artikel[i].body%></h1>
+                    </div>
+                </div>
+            </div>
+        </a>
+    <%}%>
+</div>
+
+<%- include ('../partials/footer') %>

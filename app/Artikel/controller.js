@@ -1,4 +1,5 @@
 const Category = require('../Category/model')
+const Like = require('../Like/model')
 const User = require('../User/model')
 const Artikel = require('./model')
 const path = require('path')
@@ -12,13 +13,19 @@ module.exports={
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
             let session_id= req.session.user.id
+            const panjang = await Artikel.find({user:session_id})
+
             const artikel = await Artikel.find({user:session_id}).populate('category')
+            
+            const like = await Like.find({pembuat:session_id})
+            console.log(like)
             
 
             res.render('artikel/index',{
                 alert,
                 artikel,
-                session:req.session.user
+                session:req.session.user,
+                like
             })
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)
@@ -97,10 +104,12 @@ module.exports={
         try {
             const {id} = req.params;
             const artikel = await Artikel.findOne({_id:id}).populate('category')
+            const like = await Like.find({artikel:artikel._id,like:'1'}).count()
             res.render('artikel/detail',{
                 session:req.session.user,
                 artikel,
-                moment:moment
+                moment:moment,
+                like
             })
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)
@@ -114,7 +123,6 @@ module.exports={
             const {id} = req.params
             const category = await Category.find()
             const artikel = await Artikel.findOne({_id:id}).populate('category')
-            console.log(artikel.judul)
             res.render('artikel/edit',{
                 category,
                 artikel,
@@ -186,6 +194,10 @@ module.exports={
             
             const {id} = req.params
             const artikel = await Artikel.findOneAndRemove({_id:id});
+            let currentImage = `${config.rootPath}/public/uploads/${artikel.thumbnail}`;
+                        if(fs.existsSync(currentImage)){
+                            fs.unlinkSync(currentImage)
+                        }
             req.flash('alertMessage', "Berhasil menghapus artikel")
             req.flash('alertStatus', "success")
 

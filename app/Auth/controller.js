@@ -56,18 +56,15 @@ module.exports={
                         name:check.name,
                         active:check.active
                     }
-                    console.log("sukses login");
                     res.redirect('/dashboard')
                 }else{
                     req.flash('alertMessage',`Data salah`)
                     req.flash('alertStatus', 'error')
-                    console.log("data salah");
                     res.redirect('/login')
                 }
             }else{
                 req.flash('alertMessage',`Data salah`)
                 req.flash('alertStatus', 'error')
-                console.log("data salah");
                 res.redirect('/login')
             }
         } catch (err) {
@@ -84,7 +81,6 @@ module.exports={
             if(check){
                 req.flash('alertMessage',`email sudah terdaftar silahakan ganti dengan yg lain`)
                 req.flash('alertStatus', 'error')
-                console.log("email sudah terdaftar silahakan ganti dengan yg lain");
                 res.redirect('/register')
             }else{
                 const salt = await bcrypt.genSalt()
