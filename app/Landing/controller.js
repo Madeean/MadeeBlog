@@ -182,5 +182,32 @@ module.exports={
             console.log(err);
             res.redirect('/')
         }
+    },
+    actionSearch:async(req,res)=>{
+        try {
+            search = req.query.search
+
+            const artikel = await Artikel.find({$or:[{judul:new RegExp('.*' + search + '.*')},{body:new RegExp('.*' + search + '.*')}]}).populate('category').populate('user')
+            const alertMessage = req.flash("alertMessage")
+            const alertStatus = req.flash("alertStatus")
+            const alert = {message:alertMessage, status:alertStatus}
+            if(!artikel){
+                
+                req.flash('alertMessage',`Artikel tidak ada`)
+                req.flash('alertStatus', 'error')
+            }else{
+                res.render('landing/viewArtikelCategory',{
+                    artikel,
+                    alert,
+                    session:req.session.user,
+                    moment:moment
+                })
+            }
+        } catch (err) {
+            req.flash('alertMessage',`${err.message}`)
+            req.flash('alertStatus', 'error')
+            console.log(err);
+            res.redirect('/')
+        }
     }
 }
