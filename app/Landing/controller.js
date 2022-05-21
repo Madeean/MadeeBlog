@@ -18,13 +18,17 @@ module.exports={
 
 
             const artikel = await Artikel.find().populate('category').populate('user').limit(berapa)
+            const slide = await Artikel.find().sort({views:-1}).populate('category').populate('user').limit(3)
+            const sticky = await Artikel.find().sort({views:1}).populate('category').populate('user').limit(2)
             
             res.render('index',{
                 session:req.session.user,
                 alert,
                 artikel,
                 moment:moment,
-                query:berapa
+                query:berapa,
+                slide,
+                sticky
             });
         } catch (err) {
             req.flash('alertMessage',`${err.message}`)

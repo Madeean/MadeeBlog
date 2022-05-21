@@ -97,3 +97,93 @@ body{
 .img_landing{
 	width: 400px;
 }
+
+.slide{
+	height: 500px;
+}
+
+.sticky_image{
+	width: 400px;
+	height: 225px;
+}
+
+.footer_top {
+	padding: 120px 0px 200px;
+	position: relative;
+	overflow-x: hidden;
+	margin-bottom: 15px;
+}
+.footer_top .footer_bg {
+	position: absolute;
+	bottom: 0;
+	background: url("../images/footer_bg.png") no-repeat scroll center 0;
+	width: 100%;
+	height: 266px;
+  }
+  
+  .footer_top .footer_bg .footer_bg_one {
+	background: url("../images/volks.gif") no-repeat center center;
+	width: 330px;
+	height: 70px;
+	background-size:100%;
+	position: absolute;
+	bottom: 0;
+	left: 30%;
+	-webkit-animation: myfirst 22s linear infinite;
+	animation: myfirst 22s linear infinite;
+	z-index: 3;
+  }
+  
+  .footer_top .footer_bg .footer_bg_two {
+	background: url("../images/cyclist.gif") no-repeat center center;
+	width: 88px;
+	height: 100px;
+	background-size:100%;
+	bottom: 0;
+	left: 38%;
+	position: absolute;
+	-webkit-animation: myfirst 30s linear infinite;
+	animation: myfirst 30s linear infinite;
+	z-index: 2;
+  }
+  .footer_top .footer_bg .footer_bg_three {
+	background: url("../images/truck-unscreen.gif") no-repeat center center;
+	width: 230px;
+	height: 120px;
+	background-size:100%;
+	bottom: 0;
+	left: 38%;
+	position: absolute;
+	-webkit-animation: myfirst 38s linear infinite;
+	animation: myfirst 38s linear infinite;
+	z-index: 1;
+  }
+  
+  
+  
+  @-moz-keyframes myfirst {
+	0% {
+	  left: -25%;
+	}
+	100% {
+	  left: 100%;
+	}
+  }
+  
+  @-webkit-keyframes myfirst {
+	0% {
+	  left: -25%;
+	}
+	100% {
+	  left: 100%;
+	}
+  }
+  
+  @keyframes myfirst {
+	0% {
+	  left: -25%;
+	}
+	100% {
+	  left: 100%;
+	}
+  }

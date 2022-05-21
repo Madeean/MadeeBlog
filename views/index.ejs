@@ -6,27 +6,11 @@
 
 <div class="swiper mySwiper w-11/12">
     <div class="swiper-wrapper">
+      <%for(let a = 0; a<slide.length; a++){%>
       <div class="swiper-slide">
-        <img
-          class="object-cover w-full h-full"
-          src="https://source.unsplash.com/user/erondu/3000x900"
-          alt="image"
-        />
+        <img src="/uploads/<%=slide[a].thumbnail%>" alt="" class="w-full slide">
       </div>
-      <div class="swiper-slide">
-        <img
-          class="object-cover w-full h-96"
-          src="https://source.unsplash.com/collection/190727/3000x900"
-          alt="image"
-        />
-      </div>
-      <div class="swiper-slide">
-        <img
-          class="object-cover w-full h-96"
-          src="https://source.unsplash.com/collection/190728/3000x900"
-          alt="image"
-        />
-      </div>
+      <%}%>
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -74,35 +58,24 @@
 
         <div class="sticky top-0 h-full bottom-3">
             <div class="">
-                <div class="card w-72 bg-base-100 shadow-xl mb-4">
-                    <figure><img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes" /></figure>
-                    <div class="card-body">
-                      <h2 class="card-title">
-                        Shoes!
-                        <div class="badge badge-secondary">NEW</div>
-                      </h2>
-                      <p>If a dog chews shoes whose shoes does he choose?</p>
-                      <div class="card-actions justify-end">
-                        <div class="badge badge-outline">Fashion</div> 
-                        <div class="badge badge-outline">Products</div>
-                      </div>
+                <%for(let i = 0; i<sticky.length; i++){%>
+                <form action="/view/<%=sticky[i]._id%>?_method=PUT" method="post">
+                  <button type="submit">
+                    <div class="card w-72 bg-base-100 shadow-xl mb-4">
+                        <figure><img src="/uploads/<%=sticky[i].thumbnail%>" alt="Shoes" class="sticky_image" /></figure>
+                        <div class="card-body">
+                          <h2 class="card-title">
+                            <%=sticky[i].judul%>
+                          </h2>
+                          <h1 class="text-left"><%- sticky[i].body%></h1>
+                          <div class="card-actions justify-end">
+                            <div class="badge badge-outline"><%=sticky[i].category?.name%></div> 
+                          </div>
+                        </div>
                     </div>
-                  </div>
-                <div class="card w-72 bg-base-100 shadow-xl">
-                    <figure><img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes" /></figure>
-                    <div class="card-body">
-                      <h2 class="card-title">
-                        Shoes!
-                        <div class="badge badge-secondary">NEW</div>
-                      </h2>
-                      <p>If a dog chews shoes whose shoes does he choose?</p>
-                      <div class="card-actions justify-end">
-                        <div class="badge badge-outline">Fashion</div> 
-                        <div class="badge badge-outline">Products</div>
-                      </div>
-                    </div>
-                  </div>
-
+                  </button>
+                </form>
+                <%}%>
             </div>
         </div>
     </div>
@@ -126,6 +99,9 @@
       },
       mousewheel: true,
       keyboard: true,
+      autoplay:{
+        delay:4000
+      }
     });
 </script>
 <%- include ('./partials/footer') %>
